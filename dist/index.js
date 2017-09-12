@@ -56,10 +56,10 @@ _passport2.default.serializeUser(Account.serializeUser());
 _passport2.default.deserializeUser(Account.deserializeUser());
 
 // api route v1
-app.use('/v1', _routes2.default);
+app.use('/api/v1', _routes2.default);
 
 app.server.listen(_config2.default.port);
-console.log('Started on prt ' + app.server.address().port);
+console.log('Started on port ' + app.server.address().port);
 
 exports.default = app;
 //# sourceMappingURL=index.js.map

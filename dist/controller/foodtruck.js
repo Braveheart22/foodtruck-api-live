@@ -29,7 +29,7 @@ exports.default = function (_ref) {
   var api = (0, _express.Router)();
 
   // '/v1/foodtruck/add' - Create
-  api.post('/add', function (req, res) {
+  api.post('/add', _authMiddleware.authenticate, function (req, res) {
     var newFoodTruck = new _foodtruck2.default();
     newFoodTruck.name = req.body.name;
     newFoodTruck.foodtype = req.body.foodtype;
@@ -65,7 +65,7 @@ exports.default = function (_ref) {
   });
 
   // '/v1/foodtruck/:id' - Update
-  api.put('/:id', function (req, res) {
+  api.put('/:id', _authMiddleware.authenticate, function (req, res) {
     _foodtruck2.default.findById(req.params.id, function (err, foodtruck) {
       if (err) {
         res.send(err);
@@ -81,7 +81,7 @@ exports.default = function (_ref) {
   });
 
   // '/v1/foodtruck/:id' - Delete
-  api.delete('/:id', function (req, res) {
+  api.delete('/:id', _authMiddleware.authenticate, function (req, res) {
     _foodtruck2.default.remove({
       _id: req.params.id
     }, function (err, foodtruck) {
@@ -94,7 +94,7 @@ exports.default = function (_ref) {
 
   // add review for a specific food truck id
   // '/v1/foodtruck/reviews/add/:id'
-  api.post('/reviews/add/:id', function (req, res) {
+  api.post('/reviews/add/:id', _authMiddleware.authenticate, function (req, res) {
     _foodtruck2.default.findById(req.params.id, function (err, foodtruck) {
       if (err) {
         res.send(err);
