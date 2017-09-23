@@ -9,7 +9,7 @@ export default ({ config, db}) => {
   let api = Router();
 
   // '/v1/foodtruck/add' - Create
-  api.post('/add', (req, res) => {
+  api.post('/add', authenticate, (req, res) => {
     let newFoodTruck = new FoodTruck();
     newFoodTruck.name = req.body.name;
     newFoodTruck.foodtype = req.body.foodtype;
@@ -66,7 +66,7 @@ export default ({ config, db}) => {
   });
 
   // '/v1/foodtruck/:id' - Delete
-  api.delete('/:id', (req, res) => {
+  api.delete('/:id', authenticate, (req, res) => {
     FoodTruck.remove({
       _id: req.params.id
     }, (err, foodtruck) => {
